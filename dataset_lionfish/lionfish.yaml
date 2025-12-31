@@ -1,0 +1,6 @@
+train: C:/Users/35797/PycharmProjects/Submarine_Senior_Project/dataset_lionfish/train/images
+val: C:/Users/35797/PycharmProjects/Submarine_Senior_Project/dataset_lionfish/val/images
+
+nc: 1
+names:
+  0: lionfish
