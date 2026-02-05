@@ -1,7 +1,7 @@
 train: C:/Users/35797/PycharmProjects/Submarine_Senior_Project/dataset/train/images
 val: C:/Users/35797/PycharmProjects/Submarine_Senior_Project/dataset/val/images
 
-nc: 1
+nc: 2
 names:
   0: lionfish
   1: sea urchin
