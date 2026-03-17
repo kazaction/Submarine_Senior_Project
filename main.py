@@ -1,16 +1,41 @@
-# This is a sample Python script.
+import onnxruntime
+import onnx
+import cv2
+import numpy as np
+filename = "./runs/detect/train14/weights/best.onnx"
+onnx_model = onnx.load(filename)
+cam = cv2.VideoCapture(0)
+onnxruntime.InferenceSession(filename)
+while True:
+    print("read")
+    ret, frame = cam.read()
+    # Display the frame with results
+    cv2.imshow('Camera Feed', frame)
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+
+    
+    if not ret: # Release resources
+        cam.release()
+        cv2.destroyAllWindows()
+        break
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+
+#run(filename)
+
+    input_size = (224, 224)  # Example size, adjust as needed
+    frame_resized = cv2.resize(frame, input_size)
+    input_tensor = np.array(frame_resized).astype(np.float32)
+    input_tensor = np.expand_dims(input_tensor, axis=0)  # Add batch dimension
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+    # Run inference
+    #outputs = ort_session.run(None, {ort_session.get_inputs()[0].name: input_tensor})
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
+# Process the outputs as needed
+
+
+
