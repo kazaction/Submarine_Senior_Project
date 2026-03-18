@@ -1,22 +1,25 @@
 import onnxruntime
 import onnx
 import cv2
-import numpy as np
+import numpy
+
 filename = "./runs/detect/train14/weights/best.onnx"
 onnx_model = onnx.load(filename)
 cam = cv2.VideoCapture(0)
 onnxruntime.InferenceSession(filename)
+
 while True:
-    print("read")
+    #print("read")
     ret, frame = cam.read()
     # Display the frame with results
-    cv2.imshow('Camera Feed', frame)
+    cv2.imshow('Submarine Camera Feed', frame)
 
+    #q button exits camera
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
-    
-    if not ret: # Release resources
+    #destroy resources allocated
+    if not ret:
         cam.release()
         cv2.destroyAllWindows()
         break
@@ -25,10 +28,10 @@ while True:
 
 #run(filename)
 
-    input_size = (224, 224)  # Example size, adjust as needed
+    input_size = (640, 640)
     frame_resized = cv2.resize(frame, input_size)
-    input_tensor = np.array(frame_resized).astype(np.float32)
-    input_tensor = np.expand_dims(input_tensor, axis=0)  # Add batch dimension
+    input_tensor = numpy.array(frame_resized).astype(numpy.float32)
+    input_tensor = numpy.expand_dims(input_tensor, axis=0)
 
 
     # Run inference
