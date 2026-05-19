@@ -1,0 +1,13 @@
+# dataset.yaml - Dataset configuration file for YOLOv8 training
+
+# Paths to image directories for each split
+train: train\images
+val: val\images
+
+# Number of classes
+nc: 2
+
+# Class names in index order
+names:
+  0: lionfish
+  1: sea urchin
